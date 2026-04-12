@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from roboforge.api.routes_health import router as health_router
+from roboforge.api.ws_events import router as ws_router
 from roboforge.config.loader import load_config
 from roboforge.config.paths import logs_dir
 from roboforge.utils.errors import RoboForgeError
@@ -59,10 +60,6 @@ def create_app() -> FastAPI:
 
     # --- Routers ---
     app.include_router(health_router)
-    # Future phases add more routers here:
-    # app.include_router(providers_router, prefix="/providers")
-    # app.include_router(chat_router)
-    # app.include_router(agents_router)
-    # ...
+    app.include_router(ws_router)
 
     return app
