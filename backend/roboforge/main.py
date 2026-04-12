@@ -14,8 +14,11 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from roboforge.api.routes_chat import router as chat_router
 from roboforge.api.routes_health import router as health_router
+from roboforge.api.routes_providers import router as providers_router
 from roboforge.api.ws_events import router as ws_router
+import roboforge.providers.claude  # noqa: F401 — register provider
 from roboforge.config.loader import load_config
 from roboforge.config.paths import logs_dir
 from roboforge.utils.errors import RoboForgeError
@@ -60,6 +63,8 @@ def create_app() -> FastAPI:
 
     # --- Routers ---
     app.include_router(health_router)
+    app.include_router(providers_router)
+    app.include_router(chat_router)
     app.include_router(ws_router)
 
     return app
