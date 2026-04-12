@@ -1,0 +1,53 @@
+# --- Node / Electron / Vite ---
+node_modules/
+.pnpm-store/
+dist/
+build/
+out/
+release/
+coverage/
+*.tsbuildinfo
+.vite/
+.electron/
+.eslintcache
+
+# --- Python / uv ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env/
+env/
+.uv-cache/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Generated artifacts (recreated by codegen) ---
+shared/ts/index.ts
+shared/py/__init__.py
+
+# --- RoboForge runtime config dir (NEVER commit) ---
+.roboforge/
+**/.roboforge/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Logs / temp ---
+*.log
+logs/
+tmp/
+.cache/
+
+# --- Secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
