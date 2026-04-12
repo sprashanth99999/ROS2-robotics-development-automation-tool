@@ -1,0 +1,23 @@
+# Default config — copied to ~/.roboforge/config.yaml on first run.
+# Edit the runtime copy, not this file.
+
+version: 1
+
+server:
+  host: "127.0.0.1"
+  port: 0  # 0 = auto-pick a free port
+  cors_origins:
+    - "http://localhost:*"
+
+ai:
+  default_provider: claude
+  providers: {}
+
+ros2:
+  distro: humble
+  setup_bash: null
+  workspace: null
+
+sim:
+  gazebo_version: harmonic
+  isaac_sim_path: null

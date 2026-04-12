@@ -7,7 +7,7 @@
 name = "roboforge-workspace"
 version = "0.0.1"
 description = "RoboForge AI workspace root (see backend/ for the runtime package)"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11"
 license = { text = "MIT" }
 readme = "README.md"
 
