@@ -18,7 +18,11 @@ from roboforge.api.routes_chat import router as chat_router
 from roboforge.api.routes_health import router as health_router
 from roboforge.api.routes_providers import router as providers_router
 from roboforge.api.ws_events import router as ws_router
-import roboforge.providers.claude  # noqa: F401 — register provider
+import roboforge.providers.claude  # noqa: F401
+import roboforge.providers.openai  # noqa: F401
+import roboforge.providers.gemini  # noqa: F401
+import roboforge.providers.mistral  # noqa: F401
+import roboforge.providers.ollama  # noqa: F401
 from roboforge.config.loader import load_config
 from roboforge.config.paths import logs_dir
 from roboforge.utils.errors import RoboForgeError
