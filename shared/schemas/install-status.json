@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "install-status",
+  "title": "InstallStatus",
+  "description": "Real-time status of the automated environment setup agent.",
+  "type": "object",
+  "required": ["phase", "status"],
+  "properties": {
+    "phase": {
+      "type": "string",
+      "enum": [
+        "detect_os", "install_ros2", "install_gazebo", "install_isaac",
+        "configure_colcon", "configure_env", "verify_health", "repair",
+        "complete"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "success", "failed", "skipped"]
+    },
+    "distro": {
+      "type": ["string", "null"],
+      "description": "Detected or chosen ROS2 distro"
+    },
+    "os": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": { "type": "string", "description": "e.g. 'Ubuntu'" },
+        "version": { "type": "string", "description": "e.g. '22.04'" },
+        "arch": { "type": "string" },
+        "wsl": { "type": "boolean" }
+      }
+    },
+    "progress": {
+      "type": ["object", "null"],
+      "properties": {
+        "percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "step": { "type": "integer" },
+        "totalSteps": { "type": "integer" },
+        "label": { "type": "string" }
+      }
+    },
+    "log": {
+      "type": ["string", "null"],
+      "description": "Latest log line from the running install step"
+    },
+    "error": {
+      "type": ["object", "null"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "recoverable": { "type": "boolean" }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

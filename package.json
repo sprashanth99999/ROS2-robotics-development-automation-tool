@@ -15,7 +15,7 @@
     "test": "echo \"[phase 22] pnpm --filter app test && uv run pytest backend/tests\"",
     "lint": "echo \"[phase 1+] eslint app/ + ruff backend/\"",
     "typecheck": "echo \"[phase 1+] tsc --noEmit + mypy backend/\"",
-    "codegen": "echo \"[phase 1] tsx scripts/codegen-types.ts\"",
+    "codegen": "node scripts/codegen-types.mjs",
     "make:provider": "echo \"[phase 7] tsx scripts/make-provider.ts\"",
     "make:agent": "echo \"[phase 19] tsx scripts/make-agent.ts\""
   }

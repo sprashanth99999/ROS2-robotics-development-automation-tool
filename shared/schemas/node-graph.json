@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node-graph",
+  "title": "NodeGraph",
+  "description": "Snapshot of the live ROS2 computation graph (nodes + topic edges).",
+  "type": "object",
+  "required": ["nodes", "topics"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "namespace"],
+        "properties": {
+          "name": { "type": "string" },
+          "namespace": { "type": "string", "description": "e.g. '/'" },
+          "package": { "type": ["string", "null"] },
+          "executable": { "type": ["string", "null"] },
+          "pid": { "type": ["integer", "null"] },
+          "publishers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Topic names this node publishes to"
+          },
+          "subscribers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Topic names this node subscribes to"
+          },
+          "services": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "parameters": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": { "$ref": "ros2-topic" },
+      "description": "All active topics in the graph"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this snapshot was captured"
+    }
+  },
+  "additionalProperties": false
+}

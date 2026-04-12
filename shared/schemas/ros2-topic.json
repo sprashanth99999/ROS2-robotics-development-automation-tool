@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ros2-topic",
+  "title": "Ros2Topic",
+  "description": "A ROS2 topic with its type, publishers, and subscribers.",
+  "type": "object",
+  "required": ["name", "msgType"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Fully qualified topic name, e.g. '/cmd_vel'"
+    },
+    "msgType": {
+      "type": "string",
+      "description": "ROS2 message type, e.g. 'geometry_msgs/msg/Twist'"
+    },
+    "publishers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Node names publishing to this topic"
+    },
+    "subscribers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Node names subscribed to this topic"
+    },
+    "hz": {
+      "type": ["number", "null"],
+      "description": "Measured publish rate in Hz (null if unknown)"
+    },
+    "qos": {
+      "type": ["object", "null"],
+      "properties": {
+        "reliability": { "type": "string", "enum": ["reliable", "best_effort"] },
+        "durability": { "type": "string", "enum": ["transient_local", "volatile"] },
+        "depth": { "type": "integer" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

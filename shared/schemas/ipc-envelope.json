@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ipc-envelope",
+  "title": "IpcEnvelope",
+  "description": "Wrapper for every message crossing the Electron-Backend boundary (HTTP, WS, or IPC).",
+  "type": "object",
+  "required": ["id", "type", "timestamp"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "UUID v4 — unique per message"
+    },
+    "type": {
+      "type": "string",
+      "description": "Dot-namespaced event type, e.g. 'chat.stream.chunk', 'ros2.node.added'"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp"
+    },
+    "payload": {
+      "description": "Arbitrary JSON payload — typed per event type at the consumer level"
+    },
+    "error": {
+      "type": ["object", "null"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "details": {}
+      },
+      "required": ["code", "message"]
+    },
+    "replyTo": {
+      "type": ["string", "null"],
+      "description": "ID of the message this is replying to (request-response pattern)"
+    }
+  },
+  "additionalProperties": false
+}

@@ -25,8 +25,9 @@ env/
 .ruff_cache/
 
 # --- Generated artifacts (recreated by codegen) ---
-shared/ts/index.ts
-shared/py/__init__.py
+# NOTE: shared/ts/index.ts and shared/py/__init__.py ARE committed so that
+# consumers don't need to run codegen after clone. Regenerate with:
+#   node scripts/codegen-types.mjs
 
 # --- RoboForge runtime config dir (NEVER commit) ---
 .roboforge/

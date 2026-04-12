@@ -1,0 +1,9 @@
+{
+  "name": "@roboforge/shared",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Language-neutral schemas + generated TS types for RoboForge AI",
+  "main": "ts/index.ts",
+  "types": "ts/index.ts",
+  "files": ["ts", "py", "schemas"]
+}

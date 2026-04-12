@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-config",
+  "title": "ProjectConfig",
+  "description": "Per-robot-project configuration stored in .roboforge/projects/<id>/config.yaml.",
+  "type": "object",
+  "required": ["id", "name", "ros2Distro"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "UUID v4 project identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable project name"
+    },
+    "description": {
+      "type": ["string", "null"]
+    },
+    "template": {
+      "type": ["string", "null"],
+      "enum": [null, "diff_drive", "arm_6dof", "quadruped", "drone", "mobile_manipulator"],
+      "description": "Template this project was created from (null if blank)"
+    },
+    "ros2Distro": {
+      "type": "string",
+      "enum": ["humble", "iron", "jazzy"],
+      "description": "Target ROS2 distribution"
+    },
+    "workspacePath": {
+      "type": "string",
+      "description": "Absolute path to the colcon workspace root"
+    },
+    "urdfPath": {
+      "type": ["string", "null"],
+      "description": "Relative path to the primary URDF/xacro file"
+    },
+    "launchFile": {
+      "type": ["string", "null"],
+      "description": "Relative path to the default launch file"
+    },
+    "defaultProvider": {
+      "type": ["string", "null"],
+      "enum": [null, "claude", "gemini", "openai", "mistral", "ollama"]
+    },
+    "gitRemote": {
+      "type": ["string", "null"],
+      "description": "Git remote URL if version-controlled"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

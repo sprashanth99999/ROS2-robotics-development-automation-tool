@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-event",
+  "title": "AgentEvent",
+  "description": "Event emitted by an agent during execution — streamed to the UI via SSE/WS.",
+  "type": "object",
+  "required": ["agentId", "agentRole", "eventType", "timestamp"],
+  "properties": {
+    "agentId": {
+      "type": "string",
+      "description": "Unique run ID for this agent invocation"
+    },
+    "agentRole": {
+      "type": "string",
+      "enum": ["planner", "ros2", "code", "setup", "debug"]
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "started", "thinking", "tool_call", "tool_result",
+        "stream_chunk", "completed", "error", "cancelled"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "message": {
+      "type": ["string", "null"],
+      "description": "Human-readable status or streamed text chunk"
+    },
+    "toolCall": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": { "type": "string" },
+        "arguments": { "type": "object" },
+        "result": {}
+      }
+    },
+    "progress": {
+      "type": ["object", "null"],
+      "properties": {
+        "step": { "type": "integer" },
+        "totalSteps": { "type": "integer" },
+        "label": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

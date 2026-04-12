@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "provider-message",
+  "title": "ProviderMessage",
+  "description": "A single message in a conversation with an AI provider.",
+  "type": "object",
+  "required": ["role", "content"],
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": ["system", "user", "assistant", "tool"]
+    },
+    "content": {
+      "type": "string",
+      "description": "Text content of the message"
+    },
+    "provider": {
+      "type": "string",
+      "enum": ["claude", "gemini", "openai", "mistral", "ollama"],
+      "description": "Which AI provider generated or should handle this message"
+    },
+    "model": {
+      "type": ["string", "null"],
+      "description": "Specific model ID override, e.g. 'claude-sonnet-4-20250514'"
+    },
+    "toolCalls": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "arguments"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "arguments": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "toolResultId": {
+      "type": ["string", "null"],
+      "description": "If role=tool, the ID of the tool call this result belongs to"
+    },
+    "metadata": {
+      "type": ["object", "null"],
+      "properties": {
+        "tokens": { "type": "integer" },
+        "latencyMs": { "type": "integer" },
+        "finishReason": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}
