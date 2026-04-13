@@ -11,6 +11,8 @@ from roboforge.ros2.launcher import launch_node, launch_file, stop_node, list_ru
 from roboforge.ros2.colcon import build, build_stream
 from roboforge.ros2.rosdep import check_deps, install_deps
 from roboforge.ros2.rosbridge import bridge
+from roboforge.ros2.introspection import list_nodes, list_topics, list_services, snapshot
+from roboforge.ros2.node_graph import build_graph
 
 router = APIRouter(prefix="/ros2", tags=["ros2"])
 
@@ -89,3 +91,30 @@ async def api_bridge_connect(url: str = Body("ws://localhost:9090", embed=True))
 async def api_bridge_disconnect():
     await bridge.disconnect()
     return {"disconnected": True}
+
+
+@router.get("/nodes")
+async def api_nodes():
+    return await list_nodes()
+
+
+@router.get("/topics")
+async def api_topics():
+    topics = await list_topics()
+    return [{"name": t.name, "msg_type": t.msg_type} for t in topics]
+
+
+@router.get("/services")
+async def api_services():
+    return await list_services()
+
+
+@router.get("/snapshot")
+async def api_snapshot():
+    return await snapshot()
+
+
+@router.get("/graph")
+async def api_graph():
+    g = await build_graph()
+    return g.to_dict()
