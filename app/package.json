@@ -10,12 +10,15 @@
     "start": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\""
   },
   "dependencies": {
+    "@types/three": "^0.183.1",
     "@xterm/addon-fit": "^0.11.0",
     "@xterm/xterm": "^6.0.0",
     "@xyflow/react": "^12.10.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "recharts": "^3.8.1",
+    "three": "^0.183.2",
+    "urdf-loader": "^0.12.7",
     "xterm": "^5.3.0",
     "zustand": "^5.0.12"
   },
