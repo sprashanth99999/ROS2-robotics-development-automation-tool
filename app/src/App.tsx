@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { ChatPanel } from "./components/chat/ChatPanel";
 import { InstallWizard } from "./components/install/InstallWizard";
+import { TerminalTabs } from "./components/terminal/TerminalTabs";
 
 type Health = { status: string; version: string } | null;
-type Tab = "chat" | "install";
+type Tab = "chat" | "install" | "terminal";
 
 const tabStyle = (active: boolean) => ({
   background: "none", border: "none", color: active ? "#58a6ff" : "#8b949e",
@@ -27,10 +28,12 @@ export function App() {
         <div style={{ marginLeft: "auto", display: "flex", gap: 4 }}>
           <button style={tabStyle(tab === "chat")} onClick={() => setTab("chat")}>Chat</button>
           <button style={tabStyle(tab === "install")} onClick={() => setTab("install")}>Install</button>
+          <button style={tabStyle(tab === "terminal")} onClick={() => setTab("terminal")}>Terminal</button>
         </div>
       </div>
       {tab === "chat" && <ChatPanel />}
       {tab === "install" && <div style={{ flex: 1, overflow: "auto" }}><InstallWizard /></div>}
+      {tab === "terminal" && <TerminalTabs />}
     </div>
   );
 }
