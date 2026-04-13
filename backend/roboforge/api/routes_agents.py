@@ -6,11 +6,13 @@ from fastapi import APIRouter, Body
 from fastapi.responses import JSONResponse
 
 from roboforge.agents.planner import PlannerAgent
+from roboforge.agents.setup_agent import SetupAgent
 
 router = APIRouter(prefix="/agents", tags=["agents"])
 
 AGENTS = {
     "planner": PlannerAgent,
+    "setup": SetupAgent,
 }
 
 
