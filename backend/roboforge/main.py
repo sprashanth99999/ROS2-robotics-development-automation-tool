@@ -19,6 +19,7 @@ from roboforge.api.routes_chat import router as chat_router
 from roboforge.api.routes_health import router as health_router
 from roboforge.api.routes_install import router as install_router
 from roboforge.api.routes_providers import router as providers_router
+from roboforge.api.routes_ros2 import router as ros2_router
 from roboforge.api.ws_events import router as ws_router
 import roboforge.providers.claude  # noqa: F401
 import roboforge.providers.openai  # noqa: F401
@@ -73,6 +74,7 @@ def create_app() -> FastAPI:
     app.include_router(chat_router)
     app.include_router(agents_router)
     app.include_router(install_router)
+    app.include_router(ros2_router)
     app.include_router(ws_router)
 
     return app
