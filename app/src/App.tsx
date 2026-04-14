@@ -7,9 +7,10 @@ import { TopicMonitor } from "./components/topics/TopicMonitor";
 import { UrdfViewer } from "./components/viewer/UrdfViewer";
 import { ViewerToolbar } from "./components/viewer/ViewerToolbar";
 import { GazeboPanel } from "./components/gazebo/GazeboPanel";
+import { SettingsPanel } from "./components/settings/SettingsPanel";
 
 type Health = { status: string; version: string } | null;
-type Tab = "chat" | "install" | "terminal" | "graph" | "topics" | "viewer" | "sim";
+type Tab = "chat" | "install" | "terminal" | "graph" | "topics" | "viewer" | "sim" | "settings";
 
 const tabStyle = (active: boolean) => ({
   background: "none", border: "none", color: active ? "#58a6ff" : "#8b949e",
@@ -38,6 +39,7 @@ export function App() {
           <button style={tabStyle(tab === "topics")} onClick={() => setTab("topics")}>Topics</button>
           <button style={tabStyle(tab === "viewer")} onClick={() => setTab("viewer")}>3D</button>
           <button style={tabStyle(tab === "sim")} onClick={() => setTab("sim")}>Sim</button>
+          <button style={tabStyle(tab === "settings")} onClick={() => setTab("settings")}>Settings</button>
         </div>
       </div>
       {tab === "chat" && <ChatPanel />}
@@ -47,6 +49,7 @@ export function App() {
       {tab === "topics" && <div style={{ flex: 1, overflow: "auto" }}><TopicMonitor /></div>}
       {tab === "viewer" && <div style={{ flex: 1, display: "flex", flexDirection: "column" }}><ViewerToolbar /><UrdfViewer /></div>}
       {tab === "sim" && <div style={{ flex: 1, overflow: "auto" }}><GazeboPanel /></div>}
+      {tab === "settings" && <div style={{ flex: 1, overflow: "auto" }}><SettingsPanel /></div>}
     </div>
   );
 }
