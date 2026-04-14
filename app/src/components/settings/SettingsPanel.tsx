@@ -30,7 +30,7 @@ export function SettingsPanel() {
       const r = await fetch(`${BACKEND}/providers/key`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ provider, key }),
+        body: JSON.stringify({ provider, api_key: key }),
       });
       if (r.ok) {
         setStatus((s) => ({ ...s, [provider]: "set" }));

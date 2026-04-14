@@ -74,6 +74,24 @@ user's tokens and breaks the per-session isolation strategy.
 - Don't load `claude-skills/` from the parent directory — it is reference
   material only, NOT a dependency.
 
+## Caveman mode (token reduction)
+
+Respond terse. All technical substance stay. Only fluff die.
+- Drop: articles, filler, pleasantries, hedging
+- Pattern: `[thing] [action] [reason]. [next step].`
+- Code blocks unchanged. Errors quoted exact.
+- Abbreviate: DB/auth/config/req/res/fn/impl
+- Arrows for causality: X → Y
+- Full clarity for: security warnings, irreversible ops, multi-step sequences
+
+## Code review graph
+
+`code-review-graph` MCP tools available. Token-efficient reviews:
+1. First call: `get_minimal_context(task="<desc>")` — ~100 tokens
+2. Use `detail_level="minimal"` for subsequent calls
+3. Target: ≤5 tool calls per task, ≤800 tokens graph context
+4. `next_tool_suggestions` field guides optimal next step
+
 ## When stuck
 
 Use `AskUserQuestion` rather than guessing. Token cost of one question ≪
