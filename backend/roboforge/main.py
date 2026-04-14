@@ -18,6 +18,7 @@ from roboforge.api.routes_agents import router as agents_router
 from roboforge.api.routes_chat import router as chat_router
 from roboforge.api.routes_health import router as health_router
 from roboforge.api.routes_install import router as install_router
+from roboforge.api.routes_projects import router as projects_router
 from roboforge.api.routes_providers import router as providers_router
 from roboforge.api.routes_rag import router as rag_router
 from roboforge.api.routes_ros2 import router as ros2_router
@@ -84,6 +85,7 @@ def create_app() -> FastAPI:
     app.include_router(sim_router)
     app.include_router(sim_ws_router)
     app.include_router(rag_router)
+    app.include_router(projects_router)
     app.include_router(terminal_router)
     app.include_router(ws_router)
 
