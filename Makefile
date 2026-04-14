@@ -1,45 +1,41 @@
 # RoboForge AI — top-level dev commands.
-# Phases that introduce real implementations replace the placeholder echos.
 
 .PHONY: help install dev build test lint typecheck codegen clean phase-status
 
 help:
 	@echo "RoboForge AI — Makefile targets"
-	@echo "  install     Install JS + Python deps (pnpm install + uv sync)"
-	@echo "  dev         Run app + backend in dev mode (Phase 4+)"
-	@echo "  build       Production build (Phase 22)"
-	@echo "  test        Run all tests (Phase 22)"
-	@echo "  lint        ESLint + ruff (Phase 1+)"
-	@echo "  typecheck   tsc --noEmit + mypy (Phase 1+)"
-	@echo "  codegen     JSON Schemas -> TS + pydantic (Phase 1)"
-	@echo "  clean       Remove build artifacts and caches"
-	@echo "  phase-status Show last completed phase commit"
+	@echo "  install     Install JS + Python deps"
+	@echo "  dev         Run Vite + backend concurrently"
+	@echo "  build       Production build"
+	@echo "  test        Run all tests"
+	@echo "  lint        ruff check backend"
+	@echo "  codegen     JSON Schemas -> TS + pydantic"
+	@echo "  clean       Remove build artifacts"
 
 install:
-	pnpm install
-	uv sync
+	cd app && npm install
+	cd backend && pip install -e ".[dev]"
 
 dev:
-	@echo "[phase 4+] pnpm dev"
+	cd backend && python -m roboforge --port 8765 &
+	cd app && npm run dev
 
 build:
-	@echo "[phase 22] pnpm build"
+	cd app && npm run build
 
 test:
-	@echo "[phase 22] pnpm test && uv run pytest"
+	cd backend && python -m pytest tests/ -q
 
 lint:
-	@echo "[phase 1+] pnpm lint && uv run ruff check ."
-
-typecheck:
-	@echo "[phase 1+] pnpm typecheck && uv run mypy backend"
+	cd backend && python -m ruff check roboforge/
 
 codegen:
-	@echo "[phase 1] pnpm codegen"
+	node scripts/codegen-types.mjs
 
 clean:
-	rm -rf node_modules dist build out coverage .vite .pytest_cache .mypy_cache .ruff_cache
+	rm -rf app/node_modules app/dist app/dist-electron
 	rm -rf backend/**/__pycache__ backend/.venv
+	rm -rf .pytest_cache .mypy_cache .ruff_cache
 
 phase-status:
 	@git log --oneline -1 --grep="^feat\|^chore" || echo "no phase commits yet"
