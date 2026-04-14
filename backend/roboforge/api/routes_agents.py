@@ -7,12 +7,20 @@ from fastapi.responses import JSONResponse
 
 from roboforge.agents.planner import PlannerAgent
 from roboforge.agents.setup_agent import SetupAgent
+from roboforge.agents.coder_agent import CoderAgent
+from roboforge.agents.reviewer_agent import ReviewerAgent
+from roboforge.agents.debugger_agent import DebuggerAgent
+from roboforge.agents.deployer_agent import DeployerAgent
 
 router = APIRouter(prefix="/agents", tags=["agents"])
 
 AGENTS = {
     "planner": PlannerAgent,
     "setup": SetupAgent,
+    "coder": CoderAgent,
+    "reviewer": ReviewerAgent,
+    "debugger": DebuggerAgent,
+    "deployer": DeployerAgent,
 }
 
 
