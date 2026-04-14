@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { GoogleAuthSection } from "./GoogleAuthSection";
 
 const BACKEND = "http://127.0.0.1:8765";
 const PROVIDERS = [
@@ -7,6 +8,7 @@ const PROVIDERS = [
   { id: "gemini", label: "Google Gemini", placeholder: "AIza..." },
   { id: "mistral", label: "Mistral", placeholder: "..." },
   { id: "ollama", label: "Ollama (local)", placeholder: "not required" },
+  { id: "gmail", label: "Gmail (API key / app pwd)", placeholder: "Google API key or app password" },
 ];
 
 export function SettingsPanel() {
@@ -51,6 +53,8 @@ export function SettingsPanel() {
 
   return (
     <div style={{ padding: 24, maxWidth: 600 }}>
+      <GoogleAuthSection />
+
       <b style={{ color: "#58a6ff", fontSize: 16, display: "block", marginBottom: 4 }}>
         AI Provider API Keys
       </b>
