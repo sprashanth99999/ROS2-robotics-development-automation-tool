@@ -6,9 +6,10 @@ import { NodeGraph } from "./components/nodegraph/NodeGraph";
 import { TopicMonitor } from "./components/topics/TopicMonitor";
 import { UrdfViewer } from "./components/viewer/UrdfViewer";
 import { ViewerToolbar } from "./components/viewer/ViewerToolbar";
+import { GazeboPanel } from "./components/gazebo/GazeboPanel";
 
 type Health = { status: string; version: string } | null;
-type Tab = "chat" | "install" | "terminal" | "graph" | "topics" | "viewer";
+type Tab = "chat" | "install" | "terminal" | "graph" | "topics" | "viewer" | "sim";
 
 const tabStyle = (active: boolean) => ({
   background: "none", border: "none", color: active ? "#58a6ff" : "#8b949e",
@@ -36,6 +37,7 @@ export function App() {
           <button style={tabStyle(tab === "graph")} onClick={() => setTab("graph")}>Graph</button>
           <button style={tabStyle(tab === "topics")} onClick={() => setTab("topics")}>Topics</button>
           <button style={tabStyle(tab === "viewer")} onClick={() => setTab("viewer")}>3D</button>
+          <button style={tabStyle(tab === "sim")} onClick={() => setTab("sim")}>Sim</button>
         </div>
       </div>
       {tab === "chat" && <ChatPanel />}
@@ -44,6 +46,7 @@ export function App() {
       {tab === "graph" && <div style={{ flex: 1 }}><NodeGraph /></div>}
       {tab === "topics" && <div style={{ flex: 1, overflow: "auto" }}><TopicMonitor /></div>}
       {tab === "viewer" && <div style={{ flex: 1, display: "flex", flexDirection: "column" }}><ViewerToolbar /><UrdfViewer /></div>}
+      {tab === "sim" && <div style={{ flex: 1, overflow: "auto" }}><GazeboPanel /></div>}
     </div>
   );
 }
